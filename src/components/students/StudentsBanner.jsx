@@ -24,7 +24,7 @@ export default function StudentsBanner() {
     } catch (error) {
       // If backend rejects unknown/unauthorized include=user, fall back gracefully.
       try {
-        const fallbackResponse = await axiosClient.get(
+        const fallbackResponse = await axiosClient.get( 
           "students?include=faculty.university"
         );
         setStudents(fallbackResponse.data?.data ?? []);
