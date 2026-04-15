@@ -1,0 +1,89 @@
+/* featureCard stil */
+.featureCard {
+  background-color: #ffffff; /* zadrži belu pozadinu */
+  border-radius: 15px;
+  padding: 25px 20px;
+  margin: 15px 0;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 250px; /* smanjeno sa prethodnih ~350-400px */
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ikonice */
+.featureIcon {
+  color: #333333; /* diskretna zelenkasta boja */
+  margin-bottom: 15px;
+  transition: color 0.3s;
+}
+
+.featureIcon:hover {
+  color: #81c784; /* svetlija zelena na hover */
+}
+
+/* naslovi */
+.featureCard .title {
+  font-size: 1.3rem; /* malo manji naslov */
+  margin-bottom: 10px;
+  color: #333333;
+}
+
+/* tekst */
+.featureCard .text {
+  font-size: 0.95rem;
+  color: #555555;
+  line-height: 1.5;
+}
+
+/* responsive tweak za manje ekrane */
+@media (max-width: 768px) {
+  .featureCard {
+    padding: 20px 15px;
+    min-height: 220px;
+  }
+  .featureCard .title {
+    font-size: 1.2rem;
+  }
+  .featureCard .text {
+    font-size: 0.9rem;
+  }
+}
+
+/* InfoSection */
+.imageWrapper {
+  height: 100%;
+}
+
+.fullHeightImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* slika pokriva celu kolonu bez deformacija */
+  border-radius: 15px;
+}
+
+.infoText h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.infoText p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #333;
+}
+
+@media (max-width: 992px) {
+  .fullHeightImage {
+    height: auto; /* da se lepo smanji na mobilnim ekranima */
+  }
+  .infoText h2 {
+    font-size: 1.75rem;
+  }
+  .infoText p {
+    font-size: 1rem;
+  }
+}
