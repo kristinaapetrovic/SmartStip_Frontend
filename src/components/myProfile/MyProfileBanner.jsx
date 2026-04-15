@@ -68,6 +68,7 @@ export default function MyProfileBanner() {
         setFaculties(res.data?.data.faculties ?? []);
       } catch (err) {
         setFaculties([]);
+        console.error(err);
       }
     };
     fetchFaculties();

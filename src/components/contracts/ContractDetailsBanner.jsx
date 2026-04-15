@@ -37,6 +37,7 @@ export default function ContractDetailBanner() {
         setErrorMessage(
           error?.response?.data?.message ?? "Neuspešno učitavanje ugovora."
         );
+        console.error(error);
       } finally {
         setLoading(false);
       }
@@ -55,6 +56,7 @@ export default function ContractDetailBanner() {
       alert("Ugovor je uspešno ažuriran!");
     } catch (error) {
       alert("Neuspešno ažuriranje ugovora.");
+      console.error(err);
     }
   };
 
