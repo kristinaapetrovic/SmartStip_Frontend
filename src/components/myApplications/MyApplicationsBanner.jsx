@@ -21,6 +21,7 @@ export default function MyApplicationsBanner() {
           setApplications(res.data?.data ?? []);
         } catch (err) {
           console.error("Greška pri učitavanju prijava:", error);
+          console.error(err);
         }
       }
     };

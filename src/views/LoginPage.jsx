@@ -27,6 +27,7 @@ export default function LoginPage() {
       navigate("/dashboard");
     } catch (err) {
       setError("Neuspešna prijava. Proverite email i lozinku.");
+      cconsole.error(err);
     }
   };
 

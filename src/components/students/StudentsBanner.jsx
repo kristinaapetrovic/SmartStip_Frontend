@@ -36,6 +36,7 @@ export default function StudentsBanner() {
             "Neuspešno učitavanje studenata. Proverite dozvole i include parametre."
         );
       }
+      console.error(error);
     } finally {
       setLoading(false);
     }

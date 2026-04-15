@@ -10,7 +10,7 @@ export default function Summary() {
     studentCount: 0,
     scholarshipCallCount: 0,
   });
-  const [error, setError] = useState(false);
+  const [setError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,6 +37,7 @@ export default function Summary() {
         });
       } catch (err) {
         setError(true);
+        console.error(err);
       }
     };
 
