@@ -19,6 +19,8 @@ import ContractsPage from "../views/ContractsPage";
 import ContractDetails from "../views/ContractsDetails";
 import ScholarshipCallsPageCreate from "../views/ScholarshipCallsPageCreate";
 import ApplicationsPageStudent from "../views/ApplicationsPageStudent";
+import Notifications from "../views/Notifications";
+import NotificationShow from "../views/NotificationShow";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,6 +40,8 @@ const router = createBrowserRouter([
       { path: "/contracts", element: <ContractsPage /> },
       { path: "/contracts/:id", element: <ContractDetails /> },
       { path: "/scholarship-calls/create", element: <ScholarshipCallsPageCreate /> },
+      { path: "/notifications", element: <Notifications /> },
+      { path: "/notifications/:id", element: <NotificationShow /> }
     ],
   },
   {
