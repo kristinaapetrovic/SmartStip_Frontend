@@ -1,12 +1,9 @@
 import { Fragment, useState, useEffect } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Badge } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import axiosClient from "../../axios/axios-client";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { useStateContext } from "../../context/ContextProvider";
-
-
-// const statuses = ["pending", "approved", "on assessment", "rejected", "documents valid"];
 
 export default function ApplicationDetailBanner() {
   const { id } = useParams();
@@ -14,52 +11,36 @@ export default function ApplicationDetailBanner() {
   const [application, setApplication] = useState(null);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+
   const [status, setStatus] = useState("");
-  const { user } = useStateContext();
   const [reasonForRejection, setReasonForRejection] = useState("");
-  const getAvailableStatuses = () => {
-  if (!user) return [];
 
-  if (user.role === "administrator") {
-    if (application?.status === "pending") {
-      return ["documents valid"];
-    }
-    return [];
-  }
+  const [validating, setValidating] = useState(false);
+  const [validationResult, setValidationResult] = useState(null);
 
-  // COMMISSIONER
-  if (user.role === "commissioner") {
-    if (application?.status === "documents valid") {
-      return ["on assessment"];
-    }
+  const { user } = useStateContext();
 
-    if (application?.status === "on assessment") {
-      return ["approved", "rejected"];
-    }
-  }
-
-  return [];
-};
- 
+  const isCommissioner = user?.role === "commissioner";
 
   useEffect(() => {
     const fetchApplication = async () => {
       setLoading(true);
       setErrorMessage("");
+
       try {
         const response = await axiosClient.get(
           `applications/${id}?include=student.user,scholarship`
         );
 
-        // VAŽNO: API vraća { data: {...} }
         const appData = response.data.data;
-        setReasonForRejection(appData.reason_for_rejection ?? "");
 
         setApplication(appData);
         setStatus(appData.status);
+        setReasonForRejection(appData.reason_for_rejection ?? "");
       } catch (error) {
         setErrorMessage(
-          error?.response?.data?.message ?? "Neuspešno učitavanje prijave."
+          error?.response?.data?.message ??
+            "Neuspešno učitavanje prijave."
         );
       } finally {
         setLoading(false);
@@ -69,121 +50,218 @@ export default function ApplicationDetailBanner() {
     fetchApplication();
   }, [id]);
 
-  const handleStatusChange = async () => {
+  // 🔥 1. PREBACIVANJE U "ON ASSESSMENT"
+  const moveToAssessment = async () => {
     try {
-
-      if (user.role === "commissioner" && status === "rejected" && !reasonForRejection) {
-        alert("Morate uneti razlog odbijanja.");
-        return;
-      }
-
       await axiosClient.put(`applications/${id}`, {
-        status,
-        reason_for_rejection: reasonForRejection
+        status: "on assessment",
       });
 
-      alert("Status je uspešno promenjen!");
+      setStatus("on assessment");
+      setApplication((prev) => ({
+        ...prev,
+        status: "on assessment",
+      }));
 
-    } catch (error) {
-      alert("Neuspešna promena statusa.");
+      alert("Prijava prebačena u assessment fazu!");
+    } catch (err) {
+      alert("Greška pri promeni statusa");
+    }
+  };
+
+  // 🔥 2. VALIDACIJA (PYTHON)
+  const handleValidate = async () => {
+    try {
+      setValidating(true);
+
+      const res = await axiosClient.post(
+  "/apply",
+        {
+           student_index: application.student?.index_number,
+  average_grade: application.student?.average_grade,
+  scholarship_name: application.scholarship?.title
+});
+
+      const result = res.data;
+      setValidationResult(result);
+
+      const newStatus = result.success ? "approved" : "rejected";
+
+      await axiosClient.put(`applications/${id}`, {
+        status: newStatus,
+        reason_for_rejection: result.message ?? null,
+      });
+
+      setStatus(newStatus);
+      setReasonForRejection(result.message ?? "");
+
+      alert(
+        result.success
+          ? "Prijava odobrena!"
+          : `Odbijena: ${result.message}`
+      );
+
+    } catch (err) {
+      alert("Greška pri validaciji");
+    } finally {
+      setValidating(false);
     }
   };
 
   return (
     <Fragment>
       <Container fluid className="mainBanner pt-5">
-        <Breadcrumb className="breadcrumb">
-          <Breadcrumb.Item href="/dashboard">Kontrolna tabla</Breadcrumb.Item>
-          {user?.role !== "student" && (
-            <Breadcrumb.Item href="/applications">Prijave</Breadcrumb.Item>
-          )}
 
-          {user?.role === "student" && (
-            <Breadcrumb.Item href={`/students/${id}/applications`}>
-              Moje prijave
-            </Breadcrumb.Item>
-          )}
-          <Breadcrumb.Item active>Detalji prijave</Breadcrumb.Item>
+        {/* BREADCRUMB */}
+        <Breadcrumb className="breadcrumb">
+          <Breadcrumb.Item href="/dashboard">
+            Kontrolna tabla
+          </Breadcrumb.Item>
+          <Breadcrumb.Item active>
+            Detalji prijave
+          </Breadcrumb.Item>
         </Breadcrumb>
 
         <h2 className="title text-start text-white w-full">Detalji prijave</h2>
         <div className="border-b border-white w-full mb-4"/>
 
+        {/* LOADING */}
         {loading ? (
-          <p className="alert-message">Učitavanje prijave...</p>
+          <p className="alert-message">Učitavanje...</p>
         ) : errorMessage ? (
           <p className="alert-message">{errorMessage}</p>
         ) : !application ? (
           <p className="alert-message">Prijava ne postoji.</p>
         ) : (
           <Row>
-            {/* STUDENT */}
+
+            {/* LEFT */}
             <Col md={4}>
               <div className="custom-card p-3 mb-3 h-full sticky-top">
                 <h5>Podaci o studentu</h5>
 
-                <p><strong>Ime i prezime:</strong> {application.student?.user?.name ?? "—"}</p>
-                <p><strong>Email:</strong> {application.student?.user?.email ?? "—"}</p>
-                <p><strong>Broj indeksa:</strong> {application.student?.index_number ?? "—"}</p>
-                <p><strong>Godina studija:</strong> {application.student?.year_of_study ?? "—"}</p>
-                <p><strong>Tip studija:</strong> {application.student?.type_of_study ?? "—"}</p>
-                <p><strong>Prosek:</strong> {application.student?.average_grade ?? "—"}</p>
-                <p><strong>Smer:</strong> {application.student?.field_of_study ?? "—"}</p>
-                <p><strong>Adresa:</strong> {application.student?.street_address ?? "—"}</p>
-                <p><strong>Telefon:</strong> {application.student?.phone_number ?? "—"}</p>
+                <p><strong>Ime:</strong> {application.student?.user?.name}</p>
+                <p><strong>Indeks:</strong> {application.student?.index_number}</p>
+                <p><strong>Prosek:</strong> {application.student?.average_grade}</p>
               </div>
             </Col>
 
-            {/* APPLICATION */}
+            {/* RIGHT */}
             <Col md={8}>
               <div className="custom-card p-3 mb-3">
-                <h5>Podaci o prijavi</h5>
+
+                <h5>Prijava</h5>
 
                 <p>
                   <strong>Status:</strong>{" "}
-                  <span className="badge bg-primary">
-                    {application.status}
-                  </span>
+                  <Badge bg="primary">{status}</Badge>
                 </p>
-              {user?.role !== "student" && (
-                <Form.Select
-                  value={status}
-                  onChange={(e) => setStatus(e.target.value)}
-                  className="mb-3"
-                >
-                  <option value={application.status}>{application.status}</option>
 
-                  {getAvailableStatuses().map((s) => (
-                    <option key={s} value={s}>
-                      {s.charAt(0).toUpperCase() + s.slice(1)}
-                    </option>
-                  ))}
-                </Form.Select>
-              )}
-              {user?.role !== "student" && getAvailableStatuses().length > 0 && (
-                <Button onClick={handleStatusChange}>
-                  Promeni status
-                </Button>
-              )}
-              {(status === "rejected" || application.status === "rejected") && (
-                <Form.Group className="mb-3">
-                  <Form.Label className="fw-bold">
-                    Razlog odbijanja prijave
-                  </Form.Label>
+                {user?.role !== "student" && (
+  <div className="mb-3">
 
-                  <Form.Control
-                    as="textarea"
-                    rows={4}
-                    value={reasonForRejection}
-                    onChange={(e) => setReasonForRejection(e.target.value)}
-                    disabled={
-                      user.role !== "commissioner" || application.status === "rejected"
-                    }
-                    placeholder="Unesite razlog odbijanja..."
-                  />
-                </Form.Group>
-              )}
+    {/* ================= ADMIN ================= */}
+    {user?.role === "administrator" &&
+      application?.status === "pending" && (
+        <Button
+          variant="warning"
+          onClick={async () => {
+            try {
+              await axiosClient.put(`applications/${id}`, {
+                status: "documents valid",
+              });
 
+              setStatus("documents valid");
+              setApplication((prev) => ({
+                ...prev,
+                status: "documents valid",
+              }));
+
+              alert("Dokumenti validirani!");
+            } catch (err) {
+              alert("Greška pri validaciji dokumenata");
+            }
+          }}
+        >
+          Validiraj dokumente
+        </Button>
+      )}
+
+    {/* ================= COMMISSIONER ================= */}
+    {user?.role === "commissioner" && (
+      <>
+        {/* STEP 1: documents valid → on assessment */}
+        {application?.status === "documents valid" && (
+          <Button
+            variant="warning"
+            onClick={async () => {
+              try {
+                await axiosClient.put(`applications/${id}`, {
+                  status: "on assessment",
+                });
+
+                setStatus("on assessment");
+                setApplication((prev) => ({
+                  ...prev,
+                  status: "on assessment",
+                }));
+
+                alert("Prebačeno u assessment fazu!");
+              } catch (err) {
+                alert("Greška pri promeni statusa");
+              }
+            }}
+          >
+            Prebaci u assessment
+          </Button>
+        )}
+
+        {/* STEP 2: on assessment → Python validation */}
+        {application?.status === "on assessment" && (
+          <Button
+            variant="success"
+            onClick={handleValidate}
+            disabled={validating}
+          >
+            {validating ? "Validacija..." : "Validiraj prijavu"}
+          </Button>
+        )}
+      </>
+    )}
+
+  </div>
+)}
+
+
+                {/* RESULT */}
+                {validationResult && (
+                  <div className="mb-3">
+                    {validationResult.success ? (
+                      <span className="text-success fw-bold">
+                        ✔ Prijava odobrena
+                      </span>
+                    ) : (
+                      <span className="text-danger fw-bold">
+                        ✖ {validationResult.reason}
+                      </span>
+                    )}
+                  </div>
+                )}
+
+                {/* REASON */}
+                {status === "rejected" && (
+                  <Form.Group className="mb-3">
+                    <Form.Label>Razlog odbijanja</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={3}
+                      value={reasonForRejection}
+                      disabled
+                    />
+                  </Form.Group>
+                )}
+
+                {/* DOCUMENTS */}
                 <h6 className="mt-4">Dokumenti</h6>
 
                 <ul className="p-0">
@@ -199,54 +277,76 @@ export default function ApplicationDetailBanner() {
                     </li>
                   )}
 
-                  {application.espb_url && (
-                    <li>
-                      <a
-                        href={application.espb_url}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        ESPB potvrda
-                      </a>
-                    </li>
-                  )}
+  {/* 📄 ESPB DOKUMENT */}
+  {application.espb_url && (
+    <li>
+      <a
+        href={application.espb_url}
+        target="_blank"
+        rel="noreferrer"
+      >
+        ESPB potvrda
+      </a>
+    </li>
+  )}
 
-                  {application.identification_card_url && (
-                    <li>
-                      <a
-                        href={application.identification_card_url}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Lična karta
-                      </a>
-                    </li>
-                  )}
+  {/* 📄 LIČNA KARTA */}
+  {application.identification_card_url && (
+    <li>
+      <a
+        href={application.identification_card_url}
+        target="_blank"
+        rel="noreferrer"
+      >
+        Lična karta
+      </a>
+    </li>
+  )}
 
-                  {application.proof_of_unenrollment_url && (
-                    <li>
-                      <a
-                        href={application.proof_of_unenrollment_url}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Potvrda o nezaposlenosti
-                      </a>
-                    </li>
-                  )}
-                </ul>
+  {/* 📄 NEZAPOSLENOST */}
+  {application.proof_of_unenrollment_url && (
+    <li>
+      <a
+        href={application.proof_of_unenrollment_url}
+        target="_blank"
+        rel="noreferrer"
+      >
+        Potvrda o nezaposlenosti
+      </a>
+    </li>
+  )}
+</ul>
+
+
               </div>
 
-              {/* SCHOLARSHIP */}
               <div className="custom-card p-3">
-                <h5>Podaci o konkursu</h5>
+  <h5>Podaci o konkursu</h5>
 
-                <p><strong>Naslov:</strong> {application.scholarship?.title ?? "—"}</p>
-                <p><strong>Opis:</strong> {application.scholarship?.description ?? "—"}</p>
-                <p><strong>Status konkursa:</strong> {application.scholarship?.status ?? "—"}</p>
-                <p><strong>Rok prijave:</strong> {application.scholarship?.application_deadline ?? "—"}</p>
-              </div>
+  <p>
+    <strong>Naslov:</strong>{" "}
+    {application.scholarship?.title ||
+     application.scholarship?.name ||
+     "—"}
+  </p>
+
+  <p>
+    <strong>Opis:</strong>{" "}
+    {application.scholarship?.description ?? "—"}
+  </p>
+
+  <p>
+    <strong>Status konkursa:</strong>{" "}
+    {application.scholarship?.status ?? "—"}
+  </p>
+
+  <p>
+    <strong>Rok prijave:</strong>{" "}
+    {application.scholarship?.application_deadline ?? "—"}
+  </p>
+</div>
             </Col>
+
           </Row>
         )}
       </Container>
