@@ -34,7 +34,7 @@ export default function LoginPage() {
   return (
     <Fragment>
       <Container fluid={true} className="guestBackground">
-        <form className="loginForm" onSubmit={handleSubmit}>
+        <form className="loginForm sm:w-[500px] rounded-md" onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
           <input
             type="text"
@@ -56,9 +56,9 @@ export default function LoginPage() {
           <div className="errorBox">{error}</div>
 
           <button type="submit" className="formButton">Prijavi se</button>
-          <div>
-            <p className="pt-2">Nemaš nalog? <Link to="/register">Registruj se</Link></p>
-            <p>Nazad na početnu? <Link to="/home">Odustani</Link></p>
+          <div className="flex flex-col gap-2 pt-2">
+            <p className="m-0">Nemaš nalog? <Link to="/register">Registruj se</Link></p>
+            <p className="m-0">Nazad na početnu? <Link to="/home">Odustani</Link></p>
           </div>
         </form>
       </Container>

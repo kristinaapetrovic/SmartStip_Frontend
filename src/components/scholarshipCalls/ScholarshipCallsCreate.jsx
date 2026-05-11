@@ -43,9 +43,10 @@ export default function ScholarshipCallsCreate() {
           <Breadcrumb.Item active>Kreiraj novi konkurs</Breadcrumb.Item>
         </Breadcrumb>
 
-        <h2 className="title mb-4">Kreiraj novi konkurs</h2>
+        <h2 className="title w-full text-white text-start">Kreiraj novi konkurs</h2>
+        <div className="border-b border-white w-full mb-4" />
 
-        <Form className="kreirajKartonForma">
+        <Form className="kreirajKartonForma sm:w-2/3">
           <Form.Group className="mb-3">
             <Form.Label>Naziv</Form.Label>
             <Form.Control

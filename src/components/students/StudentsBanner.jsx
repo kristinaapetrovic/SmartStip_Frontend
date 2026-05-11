@@ -67,8 +67,8 @@ export default function StudentsBanner() {
           <Breadcrumb.Item active>Studenti</Breadcrumb.Item>
         </Breadcrumb>
 
-        <Form.Group className="mb-3 mt-5 forme" controlId="searchStudent">
-          <Form.Label>Pretraga studenata</Form.Label>
+        <Form.Group className="mb-3 mt-5 forme flex items-center" controlId="searchStudent">
+          <Form.Label className="sm:whitespace-nowrap">Pretraga studenata</Form.Label>
           <Form.Control
             type="text"
             placeholder="Pretraga po imenu, indeksu, fakultetu..."

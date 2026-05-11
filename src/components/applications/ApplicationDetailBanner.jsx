@@ -106,7 +106,8 @@ export default function ApplicationDetailBanner() {
           <Breadcrumb.Item active>Detalji prijave</Breadcrumb.Item>
         </Breadcrumb>
 
-        <h2 className="title mb-4">Detalji prijave</h2>
+        <h2 className="title text-start text-white w-full">Detalji prijave</h2>
+        <div className="border-b border-white w-full mb-4"/>
 
         {loading ? (
           <p className="alert-message">Učitavanje prijave...</p>
@@ -118,7 +119,7 @@ export default function ApplicationDetailBanner() {
           <Row>
             {/* STUDENT */}
             <Col md={4}>
-              <div className="custom-card p-3 mb-3">
+              <div className="custom-card p-3 mb-3 h-full sticky-top">
                 <h5>Podaci o studentu</h5>
 
                 <p><strong>Ime i prezime:</strong> {application.student?.user?.name ?? "—"}</p>
@@ -185,7 +186,7 @@ export default function ApplicationDetailBanner() {
 
                 <h6 className="mt-4">Dokumenti</h6>
 
-                <ul>
+                <ul className="p-0">
                   {application.average_grade_url && (
                     <li>
                       <a

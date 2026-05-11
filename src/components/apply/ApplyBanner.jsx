@@ -27,42 +27,41 @@ export default function ApplyBanner() {
   }, []);
 
   const handleSubmit = async () => {
-  if (
-    !selectedCall ||
-    !averageGradeUrl ||
-    !espbUrl ||
-    !identificationCardUrl ||
-    !proofOfUnenrollmentUrl
-  )
-    return;
+    if (
+      !selectedCall ||
+      !averageGradeUrl ||
+      !espbUrl ||
+      !identificationCardUrl ||
+      !proofOfUnenrollmentUrl
+    )
+      return;
 
-  try {
-    await axiosClient.post("applications", {
-      scholarship_call_id: selectedCall.id,
-      student_id: user?.id,
-      average_grade_url: averageGradeUrl,
-      espb_url: espbUrl,
-      identification_card_url: identificationCardUrl,
-      proof_of_unenrollment_url: proofOfUnenrollmentUrl,
-    });
+    try {
+      await axiosClient.post("applications", {
+        scholarship_call_id: selectedCall.id,
+        student_id: user?.id,
+        average_grade_url: averageGradeUrl,
+        espb_url: espbUrl,
+        identification_card_url: identificationCardUrl,
+        proof_of_unenrollment_url: proofOfUnenrollmentUrl,
+      });
 
-    setSubmitted(true);
-    setSelectedCall(null);
-    setAverageGradeUrl("");
-    setEspbUrl("");
-    setIdentificationCardUrl("");
-    setProofOfUnenrollmentUrl("");
-  }catch (error) {
-  console.error("Greška pri slanju prijave:", error);
+      setSubmitted(true);
+      setSelectedCall(null);
+      setAverageGradeUrl("");
+      setEspbUrl("");
+      setIdentificationCardUrl("");
+      setProofOfUnenrollmentUrl("");
+    } catch (error) {
+      console.error("Greška pri slanju prijave:", error);
 
-  const message =
-    error?.response?.data?.message || 
-    error?.message ||                 
-    "Došlo je do greške prilikom slanja prijave.";
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Došlo je do greške prilikom slanja prijave.";
 
-  alert(message); 
-}
-
+      alert(message);
+    }
   };
 
   return (
@@ -73,10 +72,15 @@ export default function ApplyBanner() {
           <Breadcrumb.Item active>Prijava</Breadcrumb.Item>
         </Breadcrumb>
 
-        <h2 className="title mb-4">Prijava za stipendiju</h2>
+        <h2 className="title w-full text-white text-start mb-4">
+          Prijava za stipendiju
+        </h2>
+        <div className="border-b border-white w-full mb-4" />
 
         {submitted && (
-          <p className="alert-message text-success">Prijava je uspešno poslata!</p>
+          <p className="alert-message text-success">
+            Prijava je uspešno poslata!
+          </p>
         )}
 
         {!selectedCall ? (
@@ -100,44 +104,48 @@ export default function ApplyBanner() {
           </div>
         ) : (
           <div className="kreirajKartonForma">
-            <h5 className="title">{selectedCall.title ?? selectedCall.name}</h5>
+            <h5 className="title font-bold">
+              {selectedCall.title ?? selectedCall.name}
+            </h5>
             <p className="text">{selectedCall.description}</p>
-           
-            <label className="title">Dokument o proseku (URL)</label>
-<input
-  className="formInput mb-2"
-  type="text"
-  placeholder="Link ka dokumentu"
-  value={averageGradeUrl}
-  onChange={(e) => setAverageGradeUrl(e.target.value)}
-/>
 
-<label className="title">ESPB potvrda (URL)</label>
-<input
-  className="formInput mb-2"
-  type="text"
-  placeholder="Link ka dokumentu"
-  value={espbUrl}
-  onChange={(e) => setEspbUrl(e.target.value)}
-/>
+            <div className="flex gap-2 sm:flex-row flex-col sm:whitespace-nowrap">
+              <label className="title">Dokument o proseku (URL)</label>
+              <input
+                className="formInput mb-2"
+                type="text"
+                placeholder="Link ka dokumentu"
+                value={averageGradeUrl}
+                onChange={(e) => setAverageGradeUrl(e.target.value)}
+              />
 
-<label className="title">Lična karta (URL)</label>
-<input
-  className="formInput mb-2"
-  type="text"
-  placeholder="Link ka dokumentu"
-  value={identificationCardUrl}
-  onChange={(e) => setIdentificationCardUrl(e.target.value)}
-/>
+              <label className="title">ESPB potvrda (URL)</label>
+              <input
+                className="formInput mb-2"
+                type="text"
+                placeholder="Link ka dokumentu"
+                value={espbUrl}
+                onChange={(e) => setEspbUrl(e.target.value)}
+              />
 
-<label className="title">Potvrda o nezaposlenosti (URL)</label>
-<input
-  className="formInput mb-2"
-  type="text"
-  placeholder="Link ka dokumentu"
-  value={proofOfUnenrollmentUrl}
-  onChange={(e) => setProofOfUnenrollmentUrl(e.target.value)}
-/>
+              <label className="title">Lična karta (URL)</label>
+              <input
+                className="formInput mb-2"
+                type="text"
+                placeholder="Link ka dokumentu"
+                value={identificationCardUrl}
+                onChange={(e) => setIdentificationCardUrl(e.target.value)}
+              />
+
+              <label className="title">Potvrda o nezaposlenosti (URL)</label>
+              <input
+                className="formInput mb-2"
+                type="text"
+                placeholder="Link ka dokumentu"
+                value={proofOfUnenrollmentUrl}
+                onChange={(e) => setProofOfUnenrollmentUrl(e.target.value)}
+              />
+            </div>
             <div className="d-flex gap-2">
               <Button variant="primary" onClick={handleSubmit}>
                 Pošalji prijavu

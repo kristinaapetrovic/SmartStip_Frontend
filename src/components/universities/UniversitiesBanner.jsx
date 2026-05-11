@@ -53,9 +53,9 @@ export default function UniversitiesBanner() {
           <Breadcrumb.Item active>Univerziteti</Breadcrumb.Item>
         </Breadcrumb>
 
-        <div className="forme">
-          <Form.Group className="filterForma" controlId="searchName">
-            <Form.Label className="title">Pretraga po nazivu</Form.Label>
+        <div className="forme flex flex-col sm:flex-row gap-4 mb-4">
+          <Form.Group className="flex sm:flex-row flex-col sm:gap-4 items-center sm:whitespace-nowrap" controlId="searchName">
+            <Form.Label className="title text-start">Pretraga po nazivu</Form.Label>
             <Form.Control
               className="formInput"
               type="text"
@@ -65,8 +65,8 @@ export default function UniversitiesBanner() {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="searchLocation">
-            <Form.Label className="title">Filter po lokaciji</Form.Label>
+          <Form.Group className="flex sm:gap-4 sm:flex-row flex-col items-center sm:whitespace-nowrap" controlId="searchLocation">
+            <Form.Label className="title text-start">Filter po lokaciji</Form.Label>
             <Form.Control
               className="formSelect"
               as="select"

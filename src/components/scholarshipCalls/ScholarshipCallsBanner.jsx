@@ -56,7 +56,8 @@ export default function ScholarshipCallsBanner() {
           <Breadcrumb.Item active>Konkursi</Breadcrumb.Item>
         </Breadcrumb>
 
-        <h2 className="title mb-4">Konkursi</h2>
+        <h2 className="title w-full text-start text-white">Konkursi</h2>
+        <div className="border-b border-white w-full mb-4"/>
 
         {user?.role === "commissioner" && (
           <Button
@@ -108,12 +109,12 @@ export default function ScholarshipCallsBanner() {
         <div className="w-100">
           {calls && calls.length > 0 ? (
             calls.map((call) => (
-              <div className="custom-card" key={call.id}>
-                <h5 className="title">{call.title ?? "—"}</h5>
-                <p className="text">{call.description ?? "—"}</p>
-                <p className="text">Status: {call.status ?? "—"}</p>
-                <p className="text">Rok za prijavu: {call.application_deadline ?? "—"}</p>
-                <p className="text">Rok za prigovor: {call.complaint_deadline ?? "—"}</p>
+              <div className="custom-card text-start" key={call.id}>
+                <h5 className=" underline text-xl">{call.title ?? "—"}</h5>
+                <p className="text-md">{call.description ?? "—"}</p>
+                <p className="text-sm">Status: {call.status ?? "—"}</p>
+                <p className="text-sm">Rok za prijavu: {call.application_deadline ?? "—"}</p>
+                <p className="text-sm">Rok za prigovor: {call.complaint_deadline ?? "—"}</p>
               </div>
             ))
           ) : (

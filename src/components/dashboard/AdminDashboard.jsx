@@ -71,7 +71,7 @@ export default function AdminDashboard() {
 
   return (
     <Fragment>
-      <Container fluid className="mainBanner pt-5">
+      <Container fluid className="mt-10">
         <div className="title nameContainer">
           <p>Dobrodošli, {user?.name ?? "Administrator"}</p>
           <p>Uloga: {user?.role ?? "administrator"}</p>

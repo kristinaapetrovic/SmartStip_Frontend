@@ -68,7 +68,8 @@ export default function ContractDetailBanner() {
         <Breadcrumb.Item active>Detalji ugovora</Breadcrumb.Item>
       </Breadcrumb>
 
-      <h2 className="title mb-4">Detalji ugovora</h2>
+      <h2 className="title  text-start text-white w-full">Detalji ugovora</h2>
+        <div className="border-b border-white w-full mb-4" />
 
       {loading ? (
         <p className="alert-message">Učitavanje ugovora...</p>

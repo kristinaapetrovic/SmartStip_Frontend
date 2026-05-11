@@ -53,18 +53,19 @@ export default function ContractsBanner() {
         <Breadcrumb.Item active>Ugovori</Breadcrumb.Item>
       </Breadcrumb>
 
-      <h2 className="title mb-4">Ugovori</h2>
+      <h2 className="title text-white w-full text-start">Ugovori</h2>
+      <div className="border-b border-white w-full mb-4" />
 
       {/* Pretraga po indeksu */}
       <div
-        className="banner-search mb-4 p-3 rounded"
+        className="banner-search mb-4 p-3 rounded w-full"
         style={{ backgroundColor: "#ccf9d3" }}
       >
         <Form>
           <Row className="align-items-center">
             <Col md={6}>
               <Form.Group controlId="searchContracts" className="d-flex align-items-center">
-                <Form.Label className="me-3 mb-0 fw-bold">Pretraga po broju indeksa</Form.Label>
+                <Form.Label className="me-3 mb-0 fw-bold sm:whitespace-nowrap">Pretraga po broju indeksa</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Unesite broj indeksa studenta..."
@@ -95,8 +96,6 @@ export default function ContractsBanner() {
                 border: "1px solid #ddd",
               }}
               onClick={() => navigate(`/contracts/${contract.id}`)}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#f5f5f5")}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "white")}
             >
               <h5 className="title">Ugovor #{contract.id}</h5>
               <p className="text">

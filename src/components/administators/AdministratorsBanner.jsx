@@ -50,11 +50,12 @@ export default function AdministratorsBanner() {
           <Breadcrumb.Item active>Administratori</Breadcrumb.Item>
         </Breadcrumb>
 
-        <h2 className="title mb-4">Administratori</h2>
+        <h2 className="title w-full text-start text-white">Administratori</h2>
+        <div className="border-b border-white w-full mb-4" />
 
         {/* Pretraga */}
         <div
-          className="banner-search mb-4 p-3 rounded"
+          className="banner-search mb-4 p-3 rounded w-full"
           style={{ backgroundColor: "#ccf9d3" }}
         >
           <Form>
@@ -64,7 +65,7 @@ export default function AdministratorsBanner() {
                   controlId="searchAdmins"
                   className="d-flex align-items-center"
                 >
-                  <Form.Label className="me-3 mb-0 fw-bold">
+                  <Form.Label className="me-3 mb-0 fw-bold sm:whitespace-nowrap">
                     Pretraga administratora
                   </Form.Label>
 

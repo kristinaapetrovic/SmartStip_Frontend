@@ -1,654 +1,681 @@
+@import "tailwindcss";
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    --deep-blue: #22577a;
-    --sea-blue: #38a3a5;
-    --aqua-marine: #57cc99;
-    --green: #80ed99;
-    --light-green: #c7f9cc;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  --deep-blue: #22577a;
+  --sea-blue: #38a3a5;
+  --aqua-marine: #57cc99;
+  --green: #80ed99;
+  --light-green: #c7f9cc;
 
-    --title-font: "Poppins", sans-serif;
-    --text-font: "Roboto", sans-serif;
-    
-}
-.custom-card {
-  cursor: pointer;
-  transition: 0.2s;
-  border: 1px solid #ddd;
-  background-color: white;
-  padding: 1rem;
-  border-radius: 0.5rem;
+  --title-font: "Poppins", sans-serif;
+  --text-font: "Roboto", sans-serif;
 }
 
-.custom-card:hover {
-  background-color: #f5f5f5;
-}
-.title{
-    font-family: var(--title-font);
+input{
+  background-color: white !important;
 }
 
-.text{
-    font-family: var(--text-font);
+.title {
+  font-family: var(--title-font);
 }
 
-.footerSection{
-    color: white;
-    background-color: var(--deep-blue);
+.text {
+  font-family: var(--text-font);
 }
 
-.social{
-    color: white;
-    transition: transform 250ms;
-    display: inline-block;
+.footerSection {
+  color: white;
+  background-color: var(--deep-blue);
 }
 
-.social:hover{
-    transform: translateY(-2px);
+.social {
+  color: white;
+  transition: transform 250ms;
+  display: inline-block;
 }
 
-.copyrightSection{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 0.8rem;
-    font-family: var(--text-font);
-    background-color: var(--sea-blue);
-    color: white;
+.social:hover {
+  transform: translateY(-2px);
+}
+
+.copyrightSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.8rem;
+  font-family: var(--text-font);
+  background-color: var(--sea-blue);
+  color: white;
 }
 
 .topFixedBanner {
-    position: relative; 
-    background: linear-gradient(135deg, var(--deep-blue) 0%, var(--sea-blue) 50%, var(--aqua-marine) 100%);
-    min-height: 400px;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    var(--deep-blue) 0%,
+    var(--sea-blue) 50%,
+    var(--aqua-marine) 100%
+  );
+  min-height: 400px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .topBannerOverlay {
-    position: absolute;
-    left: 0;
-    top: 0;
-    min-height: 400px;
-    width: 100%;
-    background: rgb(0, 0, 0, 0.7);
-    height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-height: 400px;
+  width: 100%;
+  background: rgb(0, 0, 0, 0.7);
+  height: 100%;
 }
 
-.topBannerContainer{
-    width: 100%;
-    height: 100%;
+.topBannerContainer {
+  width: 100%;
+  height: 100%;
 }
 
-.topBannerText{
-    color: var(--light-green);
-    margin-left: 50px;
-    height: 100%;
-    padding-left: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.topBannerText {
+  color: var(--light-green);
+  margin-left: 50px;
+  height: 100%;
+  padding-left: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .navBackground {
-    -webkit-transition: background-color 400ms linear;
-    -moz-transition: background-color 400ms linear;
-    -o-transition: background-color 400ms linear;
-    transition: background-color 400ms linear;
-    background-color: rgba(255, 255, 255, 0.1) !important;
+  -webkit-transition: background-color 400ms linear;
+  -moz-transition: background-color 400ms linear;
+  -o-transition: background-color 400ms linear;
+  transition: background-color 400ms linear;
+  background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .navBackgroundScroll {
-    -webkit-transition: background-color 400ms linear;
-    -moz-transition: background-color 400ms linear;
-    -o-transition: background-color 400ms linear;
-    transition: background-color 400ms linear;
-    background-color: var(--light-green) !important;
+  -webkit-transition: background-color 400ms linear;
+  -moz-transition: background-color 400ms linear;
+  -o-transition: background-color 400ms linear;
+  transition: background-color 400ms linear;
+  background-color: var(--light-green) !important;
 }
 
-.navItem{
-    color: white !important;
-    font-family: var(--text-font);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 0 !important;
+.navItem {
+  color: white !important;
+  font-family: var(--text-font);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 0 !important;
 }
 
-.navItem:hover{
-    color: var(--sea-blue) !important;
-    font-family: var(--text-font);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 0 5px;
+.navItem:hover {
+  color: var(--green) !important;
+  font-family: var(--text-font);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 0 5px;
 }
 
-.navItemScroll{
-    font-family: var(--text-font);
-    text-decoration: none !important;
-    color: black !important;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 0 !important;
+.navItemScroll {
+  font-family: var(--text-font);
+  text-decoration: none !important;
+  color: black !important;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 0 !important;
 }
 
-.navItemScroll:hover{
-    font-family: var(--text-font);
-    text-decoration: none !important;
-    color: var(--deep-blue) !important;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 0 5px;
+.navItemScroll:hover {
+  font-family: var(--text-font);
+  text-decoration: none !important;
+  color: var(--deep-blue) !important;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 0 5px;
 }
 
-.activeItem{
-    color:var(--deep-blue);
+.activeItem {
+  color: var(--deep-blue);
 }
 
-.navTitle{
-    font-family: var(--title-font);
-    font-weight: 700;
-    font-size: 20px;
-    padding-right: 10px;
-    color:var(--sea-blue) !important;
+.navTitle {
+  font-family: var(--title-font);
+  font-weight: 700;
+  font-size: 20px;
+  padding-right: 10px;
+  color: var(--sea-blue) !important;
 }
 
-.navTitle:hover{
-    font-family: var(--title-font);
-    font-weight: 700;
-    font-size: 20px;
-    padding-right: 10px;
-    color:var(--green) !important;
+.navTitle:hover {
+  font-family: var(--title-font);
+  font-weight: 700;
+  font-size: 20px;
+  padding-right: 10px;
+  color: var(--green) !important;
 }
 
-.navTitleScroll{
-    font-family: var(--title-font);
-    font-weight: 700;
-    font-size: 20px;
-    padding-right: 10px;
-    color:var(--deep-blue) !important;
+.navTitleScroll {
+  font-family: var(--title-font);
+  font-weight: 700;
+  font-size: 20px;
+  padding-right: 10px;
+  color: var(--deep-blue) !important;
 }
 
-.navTitleScroll:hover{
-    font-family: var(--title-font);
-    font-weight: 700;
-    font-size: 20px;
-    padding-right: 10px;
-    color:var(--sea-blue) !important;
+.navTitleScroll:hover {
+  font-family: var(--title-font);
+  font-weight: 700;
+  font-size: 20px;
+  padding-right: 10px;
+  color: var(--sea-blue) !important;
 }
 
-.serviceCard{
-    margin: 2em;
-    box-shadow: 0 13px 25px -5px;
-    transition: all ease 200ms;
-    min-height: 480px;
+.serviceCard {
+  margin: 2em;
+  box-shadow: 0 13px 25px -5px;
+  transition: all ease 200ms;
+  min-height: 480px;
 }
 
-
-.serviceCard:hover{
-    margin: 30px 15px;
-    transform: scale(1.02);
-    box-shadow: 0 13px 35px -5px;
-    cursor: pointer;
+.serviceCard:hover {
+  margin: 30px 15px;
+  transform: scale(1.02);
+  box-shadow: 0 13px 35px -5px;
+  cursor: pointer;
 }
 
-.serviceCard>img{
-    width: 100%;
-    height: 40%;
+.serviceCard > img {
+  width: 100%;
+  height: 40%;
 }
 
 .featureIcon {
-    color: var(--deep-blue);
-    margin: 20px 0;
+  color: var(--deep-blue);
+  margin: 20px 0;
 }
 
-.serviceCard>h3{
-    padding-top: 5px;
-    color: var(--deep-blue);
+.serviceCard > h3 {
+  padding-top: 5px;
+  color: var(--deep-blue);
 }
 
-.serviceCard>p{
-    text-align: justify;
-    padding: 10px;
+.serviceCard > p {
+  text-align: justify;
+  padding: 10px;
 }
 
-.summaryBanner{
-    min-height: 300px;
-    background: linear-gradient(135deg, var(--sea-blue) 0%, var(--aqua-marine) 100%);
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    color: var(--light-green);
+.summaryBanner {
+  min-height: 300px;
+  background: linear-gradient(
+    135deg,
+    var(--sea-blue) 0%,
+    var(--aqua-marine) 100%
+  );
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  color: var(--light-green);
 }
 
-.summaryBannerOverlay{
-    background-color: rgba(0, 0, 0, 0.7);
-    min-height: 300px;
-    width: 100%;
-    left:0;
-    position: absolute;
+.summaryBannerOverlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  min-height: 300px;
+  width: 100%;
+  left: 0;
+  position: absolute;
 }
 
-.loginForm{
-    font-family: var(--title-font);
-    display: flex;
-    flex-direction: column;
-    min-width: 300px;
-    margin: 0 auto;
-    font-weight: 700;
-    background:  linear-gradient(135deg, var(--light-green), var(--green));
-    padding: 20px;
-    box-shadow: 0px 0px 10px black;
+.loginForm {
+  font-family: var(--title-font);
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  margin: 0 auto;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--light-green), var(--green));
+  padding: 20px;
+  box-shadow: 0px 0px 10px black;
 }
 
-.loginForm>input{
-    border:none;
-    padding: 5px;
-    border-radius: 20px;
-    margin: 5px 0;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.loginForm > input {
+  border: none;
+  padding: 5px;
+  border-radius: 20px;
+  margin: 5px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.loginForm>input:focus{
-    border:none;
-    padding: 5px;
-    border-radius: 20px;
-    margin: 5px 0;
-    box-shadow: 0 0 10px blue;
-    transform: scale(1.02);
-    outline: none;
+.loginForm > input:focus {
+  border: none;
+  padding: 5px;
+  border-radius: 20px;
+  margin: 5px 0;
+  box-shadow: 0 0 10px blue;
+  transform: scale(1.02);
+  outline: none;
 }
 
-
-.errorBox{
-    font-family: var(--text-font);
-    padding: 3px;
-    color: red;
-    font-weight: 400;
+.errorBox {
+  font-family: var(--text-font);
+  padding: 3px;
+  color: red;
+  font-weight: 400;
 }
 
 .mainBanner {
-    position: relative;
-    background: linear-gradient(135deg, var(--deep-blue) 0%, var(--sea-blue) 100%);
-    min-height: 100vh; /* Zauzima visinu celog viewporta */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; /* Centriranje elemenata i vertikalno */
-    text-align: center;
-  }
-  
-  
-  
-  .ustanoveContainer {
-    max-width: 800px;
-    min-width: 100%;
-    margin: 0 auto; /* Centrira ustanove unutar overlay-a */
-    padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-
-.guestBackground{
-    background: linear-gradient(135deg, var(--deep-blue) 0%, var(--sea-blue) 50%, var(--aqua-marine) 100%);
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    var(--deep-blue) 0%,
+    var(--sea-blue) 100%
+  );
+  min-height: 100vh; /* Zauzima visinu celog viewporta */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  flex-direction: column; /* Centriranje elemenata i vertikalno */
+  text-align: center;
+  padding: 0 60px !important;
+  width: 100%;
 }
 
-.nameContainer{
-    background-color: rgba(0,0,0, 0.5);
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid black;
-    color: var(--light-green);
-    font-size: 3rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 30px;
+.ustanoveContainer {
+  max-width: 800px;
+  min-width: 100%;
+  margin: 0 auto; /* Centrira ustanove unutar overlay-a */
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.formButton{
-    border: none;
-    border-radius: 20px;
-    padding: 5px;
-    color: white;
-    background-color: var(--deep-blue);
+.guestBackground {
+  background: linear-gradient(
+    135deg,
+    var(--deep-blue) 0%,
+    var(--sea-blue) 50%,
+    var(--aqua-marine) 100%
+  );
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.formButton-active{
-    background-color: var(--sea-blue);
+.nameContainer {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 30px;
+  border-radius: 5px;
+  border: 1px solid black;
+  color: var(--light-green);
+  font-size: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px;
+  margin-top: 300px;
 }
 
-.formButton:hover{
-    border: none;
-    border-radius: 20px;
-    padding: 5px;
-    color: white;
-    background-color: var(--sea-blue);
+.formButton {
+  border: none;
+  border-radius: 20px;
+  padding: 5px;
+  color: white;
+  background-color: var(--deep-blue);
 }
 
-.formButton:active{
-    border: none;
-    border-radius: 20px;
-    padding: 5px;
-    color: white;
-    background-color: var(--deep-blue);
-    transform: scale(1.02);
+.formButton-active {
+  background-color: var(--sea-blue);
 }
 
-.pacijentPodaci{
-    font-size: 25px;
-    background-color: #22577a;
-    border-radius: 10px;
-    border: 2px solid white;
-    padding: 5px;
-    color: var(--light-green);
-    margin: 50px;
-    min-width: 50%;
+.formButton:hover {
+  border: none;
+  border-radius: 20px;
+  padding: 5px;
+  color: white;
+  background-color: var(--sea-blue);
 }
 
-.pacijentInput{
-    border-radius: 10px;
-    border: 2px solid var(--green);
-    padding: 2px;
+.formButton:active {
+  border: none;
+  border-radius: 20px;
+  padding: 5px;
+  color: white;
+  background-color: var(--deep-blue);
+  transform: scale(1.02);
 }
 
-.editableInput{
-    background-color: #ffffff;
-    color: black;
-    border-radius: 10px;
+.pacijentPodaci {
+  font-size: 25px;
+  background-color: #22577a;
+  border-radius: 10px;
+  border: 2px solid white;
+  padding: 5px;
+  color: var(--light-green);
+  margin: 50px;
+  min-width: 50%;
 }
 
-.pregled{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    border: 2px solid white;
-    border-radius: 10px;
-    margin: 10px;
-    align-items: center;
-    padding:20px;
-    gap: 20px;
+.pacijentInput {
+  border-radius: 10px;
+  border: 2px solid var(--green);
+  padding: 2px;
 }
 
-.pregledOpis{
-    border: 2px solid white;
-    border-radius: 10px;
-    margin: 10px;
-    padding: 5px;
-
+.editableInput {
+  background-color: #ffffff;
+  color: black;
+  border-radius: 10px;
 }
 
-.pregledStavka{
-    border: 2px solid white;
-    border-radius: 10px;
-    margin: 10px;
-    padding: 5px;
-    background-color: var(--aqua-marine);
-    color: white;
+.pregled {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border: 2px solid white;
+  border-radius: 10px;
+  margin: 10px;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+.pregledOpis {
+  border: 2px solid white;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 5px;
+}
+
+.pregledStavka {
+  border: 2px solid white;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 5px;
+  background-color: var(--aqua-marine);
+  color: white;
 }
 
 .custom-card {
-    background-color: rgba(0, 0, 0, 0.5);  /* svetla pozadina */
-    border-radius: 10px;         /* zaokruženi ivici */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* senka za karticu */
-    padding: 20px;
-    margin: 10px auto;
-    font-size: 20px;
-    width: 60%;
-    transition: transform 0.3s ease-in-out;
-    margin: 10px 0;
-    color: white;
-  }
-  
-  .custom-card:hover {
-    transform: scale(1.05); /* povećanje kartice pri hover-u */
-  }
-
-  .pacijent-card{
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 10px;         /* zaokruženi ivici */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* senka za karticu */
-    padding: 20px;
-    margin: 10px 0;
-    font-size: 20px;
-    width: 80%;
-    transition: transform 0.3s ease-in-out;
-    margin: 10px auto;
-    display: flex;
-    justify-content: space-evenly;
-    gap: 10px;
-    cursor: pointer;
-    color: white;
-  }
-
-  .pacijent-card:hover {
-    transform: scale(1.05); /* povećanje kartice pri hover-u */
-  }
-
-  .kreirajKartonForma{
-    border: 2px solid black;
-    border-radius: 10px;
-    background-color: var(--deep-blue);
-    color: white;
-    padding: 20px;
-    margin: 30px;
-  }
-
-  .errorMessage{
-    color: red !important;
-  }
-
-.forme{
-    display: flex;
-    justify-content: space-evenly;
-    background:  linear-gradient(135deg, var(--light-green), var(--green));
-    border-radius: 20px;
-    padding: 10px;
-    gap: 20px;
-    margin: auto;
-    margin-bottom: 50px;
-    width: 60%;
+  background-color: rgba(0, 0, 0, 0.5); /* svetla pozadina */
+  border-radius: 10px; /* zaokruženi ivici */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* senka za karticu */
+  padding: 20px;
+  margin: 10px auto;
+  font-size: 20px;
+  width: 60%;
+  transition: transform 0.3s ease-in-out;
+  margin: 10px 0;
+  color: white;
+  width: 100%;
+  text-align: left;
 }
 
-.formInput{
-    background-color: white;
-    border-radius: 10px;
-    font-family: var(--text-font);
+.custom-card:hover {
+  background-color: rgba(0, 0, 0, 0.5); /* svetla pozadina */
+  transform: scale(1.01); /* povećanje kartice pri hover-u */
 }
 
-.formInput:focus{
-    background-color: white;
-    border-color: #00b4d8;
-    box-shadow: 0 0 8px rgba(0, 180, 216, 0.5);
+.pacijent-card {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px; /* zaokruženi ivici */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* senka za karticu */
+  padding: 20px;
+  margin: 10px 0;
+  font-size: 20px;
+  width: 80%;
+  transition: transform 0.3s ease-in-out;
+  margin: 10px auto;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 10px;
+  cursor: pointer;
+  color: white;
 }
 
-.formSelect{
-    background-color: white;
-    border-radius: 10px;
-    font-family: var(--text-font);
-    transition: all 0.3s ease;
-    cursor: pointer;
+.pacijent-card:hover {
+  transform: scale(1.05); /* povećanje kartice pri hover-u */
 }
 
-.formSelect:focus{
-    background-color: white;
-    border-color: #00b4d8;
-    box-shadow: 0 0 8px rgba(0, 180, 216, 0.5);
-}
- 
-.alert-message{
-    font-family: var(--title-font);
-    background-color: rgba(0, 0, 0, 0.5);  /* svetla pozadina */
-    color: var(--light-green);
-    padding: 20px;
-    border-radius: 20px;
-    
+.kreirajKartonForma {
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: var(--deep-blue);
+  color: white;
+  padding: 20px;
+  margin: 30px;
+  text-align: left;
 }
 
-.formGrid{
-    display: flex;
-    gap: 10px;
+.errorMessage {
+  color: red !important;
+}
+
+.forme {
+  display: flex;
+  justify-content: start;
+  background: linear-gradient(135deg, var(--light-green), var(--green));
+  border-radius: 20px;
+  padding: 20px 10px;
+  gap: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+.formInput {
+  background-color: white;
+  border-radius: 10px;
+  font-family: var(--text-font);
+}
+
+.formInput:focus {
+  background-color: white;
+  border-color: #00b4d8;
+  box-shadow: 0 0 8px rgba(0, 180, 216, 0.5);
+}
+
+.formSelect {
+  background-color: white;
+  border-radius: 10px;
+  font-family: var(--text-font);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.formSelect:focus {
+  background-color: white;
+  border-color: #00b4d8;
+  box-shadow: 0 0 8px rgba(0, 180, 216, 0.5);
+}
+
+.alert-message {
+  font-family: var(--title-font);
+  background-color: rgba(0, 0, 0, 0.5); /* svetla pozadina */
+  color: var(--light-green);
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.formGrid {
+  display: flex;
+  gap: 10px;
 }
 
 @media only screen and (max-width: 1000px) {
-    .formGrid{
-        flex-direction: column;
-    }
+  .formGrid {
+    flex-direction: column;
   }
-
-.formColumn{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
 }
 
-.formColumn>input{
-    border:none;
-    padding: 5px;
-    border-radius: 20px;
-    margin: 5px 0;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.formColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.formColumn>input:focus{
-    border:none;
-    padding: 5px;
-    border-radius: 20px;
-    margin: 5px 0;
-    box-shadow: 0 0 10px blue;
-    transform: scale(1.02);
-    outline: none;
+.formColumn > input {
+  border: none;
+  padding: 5px;
+  border-radius: 20px;
+  margin: 5px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.formColumn>select{
-    background-color: white;
-    border-radius: 10px;
-    font-family: var(--text-font);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    padding: 5px;
-    outline: none;
-    border: none;
+.formColumn > input:focus {
+  border: none;
+  padding: 5px;
+  border-radius: 20px;
+  margin: 5px 0;
+  box-shadow: 0 0 10px blue;
+  transform: scale(1.02);
+  outline: none;
 }
 
-.kreirajPregledForma{
-    background-color: var(--deep-blue);
-    margin: 30px;
-    padding: 20px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.formColumn > select {
+  background-color: white;
+  border-radius: 10px;
+  font-family: var(--text-font);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 5px;
+  outline: none;
+  border: none;
 }
 
-.azurirajForma{
-    background-color:  var(--deep-blue);
-    padding: 10px;
-    border-radius: 10px;
-    margin: 20px;
-    min-width: 500px;
+.kreirajPregledForma {
+  background-color: var(--deep-blue);
+  margin: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.azurirajForma {
+  background-color: var(--deep-blue);
+  padding: 10px;
+  border-radius: 10px;
+  margin: 20px;
+  min-width: 500px;
 }
 
 .readOnlyInput {
-    background-color: transparent;
-    border: none;
-    color: red;
-  }
+  background-color: transparent;
+  border: none;
+  color: red;
+}
 .nonEditableInput {
-    border: none !important;
-    background-color: transparent !important;
-    color: white !important;
+  border: none !important;
+  background-color: transparent !important;
+  color: white !important;
 }
 
 .article-cards-container {
-    width: 100%;
-    padding: 20px;
-  }
-  
-  .article-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-  }
-  
-  .article-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .article-card h3 {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .article-card p {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 15px;
-  }
-  
-  .article-card a {
-    font-size: 14px;
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .article-card a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Optional: Adjust carousel height if needed */
-  .slick-slide {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .slick-prev, .slick-next {
-    z-index: 1;
-    color: #007bff;
-  }
-
-.pagination-button{
-    padding: 5px;
-    background-color: var(--aqua-marine);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    margin: 20px;
-    cursor: pointer;
+  width: 100%;
+  padding: 20px;
 }
 
-.pagination-button:disabled{
-    background-color: var(--light-green);
+.article-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
 }
 
-.breadcrumb{
-    margin-top:50px;
+.article-card:hover {
+  transform: scale(1.05);
+}
+
+.article-card h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.article-card p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.article-card a {
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.article-card a:hover {
+  text-decoration: underline;
+}
+
+/* Optional: Adjust carousel height if needed */
+.slick-slide {
+  display: flex;
+  justify-content: center;
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 1;
+  color: #007bff;
+}
+
+.pagination-button {
+  padding: 5px;
+  background-color: var(--aqua-marine);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  margin: 20px;
+  cursor: pointer;
+}
+
+.pagination-button:disabled {
+  background-color: var(--light-green);
+}
+
+.breadcrumb {
+  margin-top: 50px;
+}
+
+.breadcrumb a {
+  color: var(--light-green);
+  text-decoration: none;
+  font-family: var(--text-font);
+  font-weight: 700;
+}
+
+.breadcrumb a:hover {
+  color: var(--aqua-marine);
+  text-decoration: none;
+  font-family: var(--text-font);
+  font-weight: 700;
+  transition:all 0.3s ease;
 }

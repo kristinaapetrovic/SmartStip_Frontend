@@ -13,7 +13,13 @@ export default function ApplicationsBanner() {
 
   const navigate = useNavigate();
 
-  const statuses = ["pending", "approved", "on assessment", "rejected", "documents valid"];
+  const statuses = [
+    "pending",
+    "approved",
+    "on assessment",
+    "rejected",
+    "documents valid",
+  ];
 
   useEffect(() => {
     const fetchApplications = async () => {
@@ -21,14 +27,15 @@ export default function ApplicationsBanner() {
       setErrorMessage("");
       try {
         const response = await axiosClient.get(
-          "applications?include=student.user,scholarship"
+          "applications?include=student.user,scholarship",
         );
         setApplications(response.data?.data ?? []);
       } catch (error) {
         console.error("Greška pri učitavanju prijava:", error);
         setApplications([]);
         setErrorMessage(
-          error?.response?.data?.message ?? "Neuspešno učitavanje prijava. Proverite dozvole."
+          error?.response?.data?.message ??
+            "Neuspešno učitavanje prijava. Proverite dozvole.",
         );
       } finally {
         setLoading(false);
@@ -46,7 +53,8 @@ export default function ApplicationsBanner() {
       q === "" || studentIndex.includes(q) || scholarshipTitle.includes(q);
 
     const matchesStatus =
-      statusFilter === "" || app.status?.toLowerCase() === statusFilter.toLowerCase();
+      statusFilter === "" ||
+      app.status?.toLowerCase() === statusFilter.toLowerCase();
 
     return matchesSearch && matchesStatus;
   });
@@ -59,15 +67,24 @@ export default function ApplicationsBanner() {
           <Breadcrumb.Item active>Prijave</Breadcrumb.Item>
         </Breadcrumb>
 
-        <h2 className="title mb-4">Prijave</h2>
+        <h2 className="title text-start text-white w-full">Prijave</h2>
+        <div className="border-b border-white w-full mb-4" />
 
         {/* Banner-style pretraga + filter po statusu */}
-        <div className="banner-search mb-4 p-3 rounded" style={{ backgroundColor: "#ccf9d3" }}>
-          <Form>
+        <div
+          className="banner-search mb-4 p-3 rounded w-100"
+          style={{ backgroundColor: "#ccf9d3" }}
+        >
+          <Form className="w-100">
             <Row className="align-items-center">
               <Col md={6} className="mb-2">
-                <Form.Group controlId="searchApplications" className="d-flex align-items-center">
-                  <Form.Label className="me-3 mb-0 fw-bold">Pretraga prijava</Form.Label>
+                <Form.Group
+                  controlId="searchApplications"
+                  className="d-flex align-items-center"
+                >
+                  <Form.Label className="me-3 mb-0 fw-bold sm:whitespace-nowrap">
+                    Pretraga prijava
+                  </Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Po indeksu ili nazivu konkursa..."
@@ -78,8 +95,11 @@ export default function ApplicationsBanner() {
                 </Form.Group>
               </Col>
 
-              <Col md={3} className="mb-2">
-                <Form.Group controlId="statusFilter" className="d-flex align-items-center">
+              <Col md={6} className="mb-2">
+                <Form.Group
+                  controlId="statusFilter"
+                  className="d-flex align-items-center"
+                >
                   <Form.Label className="me-3 mb-0 fw-bold">Status</Form.Label>
                   <Form.Select
                     value={statusFilter}
@@ -108,18 +128,34 @@ export default function ApplicationsBanner() {
           ) : filteredApplications && filteredApplications.length > 0 ? (
             filteredApplications.map((app) => (
               <div
-                className="custom-card mb-3 p-3"
+                className="custom-card mb-3 p-3 text-start flex flex-col justify-between items-center sm:flex-col sm:flex-row"
                 key={app.id}
-                style={{ cursor: "pointer", transition: "0.2s", border: "1px solid #ddd" }}
+                style={{
+                  cursor: "pointer",
+                  transition: "0.2s",
+                  border: "1px solid #ddd",
+                }}
                 onClick={() => navigate(`/applications/${app.id}`)}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#f5f5f5")}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "white")}
               >
-                <h5 className="title">Prijava #{app.id}</h5>
-                <p className="text">Student: {app.student?.user?.name ?? "—"}</p>
-                <p className="text">Broj indeksa: {app.student?.index_number ?? "—"}</p>
-                <p className="text">Konkurs: {app.scholarship?.title ?? "—"}</p>
-                <p className="text">Status: {app.status ?? "—"}</p>
+                <Col md={1}>
+                  <h5 className="title">Prijava #{app.id}</h5>
+                </Col>
+                <Col md={2}>
+                  <p className="text">
+                    Student: {app.student?.user?.name ?? "—"}
+                  </p>
+                </Col>
+                <Col md={2}>
+                  <p className="text">
+                    Broj indeksa: {app.student?.index_number ?? "—"}
+                  </p>
+                </Col>
+                <Col md={2}>
+                  <p className="text">Konkurs: {app.scholarship?.title ?? "—"}</p>
+                </Col>
+                <Col md={2}>
+                  <p className="text">Status: {app.status ?? "—"}</p>
+                </Col>
               </div>
             ))
           ) : (

@@ -58,15 +58,17 @@ export default function StudentApplicationsBanner() {
           <Breadcrumb.Item active>Prijave studenta</Breadcrumb.Item>
         </Breadcrumb>
 
-        <h2 className="title mb-4">Prijave studenta</h2>
+
+        <h2 className="title mb-4 w-full text-start text-white">Prijave studenta</h2>
+        <div className="border-b border-white w-full mb-4"/>
 
         {/* Banner-style pretraga + filter po statusu */}
-        <div className="banner-search mb-4 p-3 rounded" style={{ backgroundColor: "#ccf9d3" }}>
+        <div className="banner-search mb-4 p-3 rounded w-full" style={{ backgroundColor: "#ccf9d3" }}>
           <Form>
             <Row className="align-items-center">
               <Col md={6} className="mb-2">
                 <Form.Group controlId="searchApplications" className="d-flex align-items-center">
-                  <Form.Label className="me-3 mb-0 fw-bold">Pretraga prijava</Form.Label>
+                  <Form.Label className="me-3 mb-0 fw-bold sm:whitespace-nowrap">Pretraga prijava</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Po nazivu konkursa..."
@@ -111,8 +113,6 @@ export default function StudentApplicationsBanner() {
                 key={app.id}
                 style={{ cursor: "pointer", transition: "0.2s", border: "1px solid #ddd" }}
                 onClick={() => navigate(`/applications/${app.id}`)}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#f5f5f5")}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "white")}
               >
                 <h5 className="title">Prijava #{app.id}</h5>
                 <p className="text">Student: {student.user?.name ?? "—"}</p>
